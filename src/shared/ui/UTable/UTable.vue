@@ -8,10 +8,11 @@
           :key="index"
           class="table__header-cell"
         >
-          {{ header }}
+          {{ header.title }}
         </th>
       </tr>
       </thead>
+
       <tbody>
       <tr
         v-for="(row, rowIndex) in rows"
@@ -19,11 +20,16 @@
         class="table__row"
       >
         <td
-          v-for="(cell, cellIndex) in row"
-          :key="cellIndex"
+          v-for="(cell, index) in headers"
+          :key="cell.key"
           class="table__cell"
         >
-          {{ cell }}
+          <div v-if="cell.key !== 'control'">
+            {{ row[cell.key] }}
+          </div>
+          <div v-else>
+            control
+          </div>
         </td>
       </tr>
       </tbody>
@@ -36,9 +42,11 @@
 </template>
 
 <script setup lang="ts">
+import type { TableColumn } from '@/shared/ui/UTable/types.ts'
+
 export interface TableProps {
-  headers?: string[]
-  rows: (string | number)[][]
+  headers?: TableColumn[]
+  rows: TableColumn[]
   emptyText?: string
 }
 
