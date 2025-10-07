@@ -5,10 +5,10 @@ import { fetchOrganizations } from '@/entities/organization/model/organizationAp
 import type { Organization} from '@/entities/organization/model/types.ts'
 import type { TableColumn } from '@/shared/ui/UTable/types.ts'
 
-import Index from '@/shared/ui/ULoader/index.vue'
-import Index from '@/shared/ui/UButton/index.vue'
-import Index from '@/shared/ui/UPagination/index.vue'
-import Index from '@/shared/ui/UTable/index.vue'
+import { ULoader } from '@/shared/ui/'
+import { UButton } from '@/shared/ui/'
+import { UPagination } from '@/shared/ui'
+import { UTable } from '@/shared/ui/'
 
 const itemsPerPage = 10
 const tableHeaders:TableColumn[] = [
@@ -70,14 +70,14 @@ onMounted(() => fetchOrg())
     <div class="organizations__control">
       <div>Search</div>
 
-      <Index>Добавить</Index>
+      <UButton>Добавить</UButton>
     </div>
 
-    <Index v-if="isLoading" />
+    <ULoader v-if="isLoading" />
     <div v-else>
       <div class="organizations__data">
-        <Index :rows="organizationFormatted" :headers="tableHeaders" />
-        <Index :total="totalPages" :currentPage="currentPage" />
+        <UTable :rows="organizationFormatted" :headers="tableHeaders" />
+        <UPagination :total="totalPages" :currentPage="currentPage" />
       </div>
     </div>
   </div>

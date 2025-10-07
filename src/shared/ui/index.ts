@@ -1,0 +1,6 @@
+export * from './UTable'
+export * from './UPagination'
+export * from './UModal'
+export * from './ULoader'
+export * from './UInput'
+export * from './UButton'
