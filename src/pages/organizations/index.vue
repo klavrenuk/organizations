@@ -9,6 +9,7 @@ import { ULoader } from '@/shared/ui/'
 import { UButton } from '@/shared/ui/'
 import { UPagination } from '@/shared/ui'
 import { UTable } from '@/shared/ui/'
+import { UModal } from '@/shared/ui/'
 
 const itemsPerPage = 10
 const tableHeaders:TableColumn[] = [
@@ -37,6 +38,7 @@ const tableHeaders:TableColumn[] = [
 const organizations = ref<Organization[]>([])
 const isLoading = ref<boolean>(true)
 const currentPage = ref<number>(1)
+const isShowModal = ref<boolean>(false)
 
 const organizationFormatted = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage
@@ -62,6 +64,10 @@ const fetchOrg = async() => {
   }
 }
 
+const onAddOrg = () => {
+  isShowModal.value = true
+}
+
 onMounted(() => fetchOrg())
 </script>
 
@@ -70,7 +76,7 @@ onMounted(() => fetchOrg())
     <div class="organizations__control">
       <div>Search</div>
 
-      <UButton>Добавить</UButton>
+      <UButton @click="onAddOrg">Добавить</UButton>
     </div>
 
     <ULoader v-if="isLoading" />
@@ -80,6 +86,12 @@ onMounted(() => fetchOrg())
         <UPagination :total="totalPages" :currentPage="currentPage" />
       </div>
     </div>
+
+    <UModal v-model="isShowModal">
+      <div>
+        Modal Inner
+      </div>
+    </UModal>
   </div>
 </template>
 
