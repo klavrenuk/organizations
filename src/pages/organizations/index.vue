@@ -10,6 +10,7 @@ import { UButton } from '@/shared/ui/'
 import { UPagination } from '@/shared/ui'
 import { UTable } from '@/shared/ui/'
 import { UModal } from '@/shared/ui/'
+import { OrganizationForm } from '@/features/organization-form/'
 
 const itemsPerPage = 10
 const tableHeaders:TableColumn[] = [
@@ -89,7 +90,7 @@ onMounted(() => fetchOrg())
 
     <UModal v-model="isShowModal">
       <div>
-        Modal Inner
+        <OrganizationForm />
       </div>
     </UModal>
   </div>
